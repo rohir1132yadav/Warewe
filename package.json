@@ -1,0 +1,19 @@
+{
+  "name": "email-verification-module",
+  "version": "1.0.0",
+  "description": "A Node.js module for email verification using SMTP protocol",
+  "main": "lib/emailVerifier.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node index.js"
+  },
+  "keywords": ["email", "verification", "smtp", "nodejs"],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "smtp-connection": "^4.0.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

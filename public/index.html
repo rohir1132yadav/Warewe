@@ -232,26 +232,27 @@
     function displayResult(data) {
       const { email, verification, suggestion } = data;
 
-      const isValid = verification.valid;
+      const isValid = verification.result === "valid";
+
       statusDiv.textContent = isValid ? "✓ Valid Email" : "✗ Invalid Email";
       statusDiv.className = `status ${isValid ? "valid" : "invalid"}`;
 
       let details = `
         <div><strong>Email:</strong> ${email}</div>
-        <div><strong>Valid:</strong> ${isValid ? "Yes" : "No"}</div>
+        <div><strong>Result:</strong> ${verification.result}</div>
+        <div><strong>Reason:</strong> ${verification.subresult}</div>
+        <div><strong>Domain:</strong> ${verification.domain}</div>
+        <div><strong>MX Records:</strong> ${verification.mxRecords.join(", ")}</div>
       `;
-
-      if (verification.reason) {
-        details += `<div><strong>Reason:</strong> ${verification.reason}</div>`;
-      }
 
       detailsDiv.innerHTML = details;
 
       suggestionDiv.innerHTML = "";
-      if (suggestion && suggestion !== email) {
+
+      if (verification.didyoumean) {
         suggestionDiv.innerHTML = `
           <div class="suggestion">
-            💡 <strong>Did you mean:</strong> ${suggestion}?
+            💡 <strong>Did you mean:</strong> ${verification.didyoumean}?
           </div>
         `;
       }
